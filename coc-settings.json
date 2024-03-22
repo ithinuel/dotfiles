@@ -1,0 +1,14 @@
+{
+    "coc.preferences.formatOnSave": true,
+    "cSpell.userWords": [
+        "Coresight"
+    ],
+    "languageserver": {
+        "nix": {
+            "command": "nixd",
+            "filetypes": [
+                "nix"
+            ]
+        }
+    }
+}

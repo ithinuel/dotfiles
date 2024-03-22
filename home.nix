@@ -14,6 +14,16 @@ let
   };
 
   awthemes = pkgs.callPackage ./awtheme.nix {};
+  gdb-dashboard = pkgs.callPackage ./gdb-dashboard.nix {};
+  fd-find = pkgs.rustPlatform.buildRustPackage rec {
+      pname = "fd-find";
+      version = "9.0.0";
+      src = pkgs.fetchCrate {
+          inherit pname version;
+          hash = "sha256-a56mn3ERyVqcGY9+y77Z3zPon1aq4nnOIcY+cnrL8rw=";
+      };
+      cargoHash = "sha256-3lpxsAtwTxPPoFmHAxrbdoLDyf5E/EjYcKSj0A3HbZQ";
+  };
   exa = pkgs.rustPlatform.buildRustPackage rec {
       pname = "exa";
       version = "0.10.1";
@@ -50,6 +60,12 @@ in
     gitFull
     htop
 
+    # embedded dev tools
+    usbutils
+    minicom
+    clang-tools
+    cmake-format
+
     # gui tools
     meld
 
@@ -69,7 +85,9 @@ in
 
     # custom packages
     awthemes
+    gdb-dashboard
     exa
+    fd-find
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -81,6 +99,19 @@ in
     # ".screenrc".source = dotfiles/screenrc;
 
     ".Xresources".text = "*TkTheme: awdark";
+    ".gdbinit".text = ''
+    set print pretty on
+
+    python
+
+    import os
+
+    gdb.execute('source ${gdb-dashboard.outPath}/.gdbinit')
+    #gdb.execute('source ${builtins.toString ./.}/openocd.gdb')
+
+    end
+    '';
+    ".config/nvim/coc-settings.json".source = config.lib.file.mkOutOfStoreSymlink "${builtins.toString ./.}/coc-settings.json";
   };
 
   home.sessionVariables = {
@@ -131,8 +162,10 @@ in
       coc-spell-checker
       coc-nvim
 
-      (vimPluginFromGitHub "LunarWatcher" "auto-pairs" "v4.0.2" "sha256-dxWcbmXPeq87vnUgNFoXIqhIHMjmYoab2vhm1ijp9MM")
-      (vimPluginFromGitHub "Badacadabra" "vim-archery" "0084b5d1199deb5c671e0e6017e9a0224f66f236" "sha256-z2qfEHz+CagbP5GBVzARsP1+H6LjBEna6x1L0+ynzbk")
+      (vimPluginFromGitHub "LunarWatcher" "auto-pairs" "v4.0.2"
+                           "sha256-dxWcbmXPeq87vnUgNFoXIqhIHMjmYoab2vhm1ijp9MM")
+      (vimPluginFromGitHub "Badacadabra" "vim-archery" "0084b5d1199deb5c671e0e6017e9a0224f66f236"
+                           "sha256-z2qfEHz+CagbP5GBVzARsP1+H6LjBEna6x1L0+ynzbk")
     ];
 
     extraConfig = builtins.readFile ./neovim.vim;
