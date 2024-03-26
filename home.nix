@@ -2,40 +2,40 @@
 
 let
   # builds a vim plugin from a github repository at a given hash
-  vimPluginFromGitHub = owner: project: rev: hash: pkgs.vimUtils.buildVimPlugin {
-    pname = "${lib.strings.sanitizeDerivationName project}";
-    version = rev;
-    src = pkgs.fetchFromGitHub {
-      owner = owner;
-      repo = project;
-      rev = rev;
-      hash = hash;
-    };
-  };
-
-  awthemes = pkgs.callPackage ./awtheme.nix {};
-  gdb-dashboard = pkgs.callPackage ./gdb-dashboard.nix {};
-  fd-find = pkgs.rustPlatform.buildRustPackage rec {
-      pname = "fd-find";
-      version = "9.0.0";
-      src = pkgs.fetchCrate {
-          inherit pname version;
-          hash = "sha256-a56mn3ERyVqcGY9+y77Z3zPon1aq4nnOIcY+cnrL8rw=";
+  vimPluginFromGitHub = owner: project: rev: hash:
+    pkgs.vimUtils.buildVimPlugin {
+      pname = "${lib.strings.sanitizeDerivationName project}";
+      version = rev;
+      src = pkgs.fetchFromGitHub {
+        owner = owner;
+        repo = project;
+        rev = rev;
+        hash = hash;
       };
-      cargoHash = "sha256-3lpxsAtwTxPPoFmHAxrbdoLDyf5E/EjYcKSj0A3HbZQ";
+    };
+
+  awthemes = pkgs.callPackage ./awtheme.nix { };
+  gdb-dashboard = pkgs.callPackage ./gdb-dashboard.nix { };
+  fd-find = pkgs.rustPlatform.buildRustPackage rec {
+    pname = "fd-find";
+    version = "9.0.0";
+    src = pkgs.fetchCrate {
+      inherit pname version;
+      hash = "sha256-a56mn3ERyVqcGY9+y77Z3zPon1aq4nnOIcY+cnrL8rw=";
+    };
+    cargoHash = "sha256-3lpxsAtwTxPPoFmHAxrbdoLDyf5E/EjYcKSj0A3HbZQ";
   };
   exa = pkgs.rustPlatform.buildRustPackage rec {
-      pname = "exa";
-      version = "0.10.1";
-      src = pkgs.fetchCrate {
-          inherit pname version;
-          hash = "sha256-1rzAHMe0tADjx9nI5X9ujqBIYVPtoagx3UGhIdRxaCE=";
-      };
-      cargoHash = "sha256-ah8IjShmivS6IWL3ku/4/j+WNr/LdUnh1YJnPdaFdcM=";
+    pname = "exa";
+    version = "0.10.1";
+    src = pkgs.fetchCrate {
+      inherit pname version;
+      hash = "sha256-1rzAHMe0tADjx9nI5X9ujqBIYVPtoagx3UGhIdRxaCE=";
+    };
+    cargoHash = "sha256-ah8IjShmivS6IWL3ku/4/j+WNr/LdUnh1YJnPdaFdcM=";
   };
-in
 
-{
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "ithinuel";
@@ -100,18 +100,20 @@ in
 
     ".Xresources".text = "*TkTheme: awdark";
     ".gdbinit".text = ''
-    set print pretty on
+      set print pretty on
 
-    python
+      python
 
-    import os
+      import os
 
-    gdb.execute('source ${gdb-dashboard.outPath}/.gdbinit')
-    #gdb.execute('source ${builtins.toString ./.}/openocd.gdb')
+      gdb.execute('source ${gdb-dashboard.outPath}/.gdbinit')
+      #gdb.execute('source ${builtins.toString ./.}/openocd.gdb')
 
-    end
+      end
     '';
-    ".config/nvim/coc-settings.json".source = config.lib.file.mkOutOfStoreSymlink "${builtins.toString ./.}/coc-settings.json";
+    ".config/nvim/coc-settings.json".source =
+      config.lib.file.mkOutOfStoreSymlink
+      "${builtins.toString ./.}/coc-settings.json";
   };
 
   home.sessionVariables = {
@@ -119,7 +121,7 @@ in
     EDITOR = "nvim";
     CARGO_PATH = "\${HOME}/.cargo/bin";
     PATH = "\${PATH}:\${CARGO_PATH}";
-    TCLLIBPATH = "${awthemes.outPath}";
+    TCLLIBPATH="${awthemes}";
   };
 
   # Let Home Manager install and manage itself.
@@ -163,9 +165,10 @@ in
       coc-nvim
 
       (vimPluginFromGitHub "LunarWatcher" "auto-pairs" "v4.0.2"
-                           "sha256-dxWcbmXPeq87vnUgNFoXIqhIHMjmYoab2vhm1ijp9MM")
-      (vimPluginFromGitHub "Badacadabra" "vim-archery" "0084b5d1199deb5c671e0e6017e9a0224f66f236"
-                           "sha256-z2qfEHz+CagbP5GBVzARsP1+H6LjBEna6x1L0+ynzbk")
+        "sha256-dxWcbmXPeq87vnUgNFoXIqhIHMjmYoab2vhm1ijp9MM")
+      (vimPluginFromGitHub "Badacadabra" "vim-archery"
+        "0084b5d1199deb5c671e0e6017e9a0224f66f236"
+        "sha256-z2qfEHz+CagbP5GBVzARsP1+H6LjBEna6x1L0+ynzbk")
     ];
 
     extraConfig = builtins.readFile ./neovim.vim;
