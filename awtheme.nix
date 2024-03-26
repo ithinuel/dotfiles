@@ -10,9 +10,10 @@ tcl.mkTclDerivation rec {
   };
 
   buildInputs = [ tcl tk ];
-  enableParallelBuilding = true;
+  dontConfigure = true;
+  dontBuild = true;
 
-  postInstall = ''
+  installPhase = ''
     mkdir -p $out/lib
     cp -r pkgIndex.tcl $(cat pkgIndex.tcl | grep -o '\w\+.tcl' | uniq -0) i/ $out/lib
   '';
