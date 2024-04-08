@@ -22,7 +22,6 @@ tcl.mkTclDerivation rec {
     homepage = "https://github.com/cyrus-and/gdb-dashboard";
     description = "gdb-dashboard";
     licenses = with lib.licences; [ mit ];
-    maintainers = with lib.maintainers; [  ];
+    maintainers = with lib.maintainers; [ ];
   };
 }
-

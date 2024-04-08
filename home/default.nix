@@ -1,5 +1,4 @@
 { config, pkgs, lib, ... }:
-
 let
   # builds a vim plugin from a github repository at a given hash
   vimPluginFromGitHub = owner: project: rev: hash:
@@ -13,65 +12,23 @@ let
         hash = hash;
       };
     };
-
-  awthemes = pkgs.callPackage ./awtheme.nix { };
-  gdb-dashboard = pkgs.callPackage ./gdb-dashboard.nix { };
-  fd-find = pkgs.rustPlatform.buildRustPackage rec {
-    pname = "fd-find";
-    version = "9.0.0";
-    src = pkgs.fetchCrate {
-      inherit pname version;
-      hash = "sha256-a56mn3ERyVqcGY9+y77Z3zPon1aq4nnOIcY+cnrL8rw=";
-    };
-    cargoHash = "sha256-3lpxsAtwTxPPoFmHAxrbdoLDyf5E/EjYcKSj0A3HbZQ";
-  };
-  exa = pkgs.rustPlatform.buildRustPackage rec {
-    pname = "exa";
-    version = "0.10.1";
-    src = pkgs.fetchCrate {
-      inherit pname version;
-      hash = "sha256-1rzAHMe0tADjx9nI5X9ujqBIYVPtoagx3UGhIdRxaCE=";
-    };
-    cargoHash = "sha256-ah8IjShmivS6IWL3ku/4/j+WNr/LdUnh1YJnPdaFdcM=";
-  };
-
-in {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "ithinuel";
-  home.homeDirectory = "/home/ithinuel";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
-
+in
+{
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
     # terminal tools
-    tilix
     zsh
-    gcc_multi
     gitFull
     htop
 
     # embedded dev tools
-    usbutils
     minicom
     clang-tools
     cmake-format
 
     # gui tools
     meld
-
-    # 3D Cad
-    freecad
-    kicad
 
     # Rust accelerated cli tools
     rustup
@@ -88,6 +45,12 @@ in {
     gdb-dashboard
     exa
     fd-find
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    gcc_multi
+    usbutils
+
+    freecad
+    kicad
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -106,14 +69,13 @@ in {
 
       import os
 
-      gdb.execute('source ${gdb-dashboard.outPath}/.gdbinit')
+      gdb.execute('source ${pkgs.gdb-dashboard.outPath}/.gdbinit')
       #gdb.execute('source ${builtins.toString ./.}/openocd.gdb')
 
       end
     '';
-    ".config/nvim/coc-settings.json".source =
-      config.lib.file.mkOutOfStoreSymlink
-      "${builtins.toString ./.}/coc-settings.json";
+    ".config/nvim/coc-settings.json".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/Documents/nix-config/home/coc-settings.json";
   };
 
   home.sessionVariables = {
@@ -121,7 +83,7 @@ in {
     EDITOR = "nvim";
     CARGO_PATH = "\${HOME}/.cargo/bin";
     PATH = "\${PATH}:\${CARGO_PATH}";
-    TCLLIBPATH="${awthemes}";
+    TCLLIBPATH = "${pkgs.awthemes}";
   };
 
   # Let Home Manager install and manage itself.
@@ -188,10 +150,10 @@ in {
       gsti = "gst --ignored";
       gfa = "git fetch --all --recurse-submodules --prune";
 
-      rg = "rg -p --no-heading -g '!tags' --no-ignore --follow";
+      rg = "rg -p --no-heading --follow";
       fd = "fd --no-ignore";
-      ll = "exa -l --git -@";
-      lla = "exa -la --git -@";
+      ll = "exa -l --git";
+      lla = "exa -la --git";
       cat = "bat -p";
       j = "just";
 
@@ -215,10 +177,5 @@ in {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
-  };
-
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
   };
 }
