@@ -25,7 +25,7 @@
           ./hosts/ithinuel-air/configuration.nix
           home-manager.darwinModules.home-manager
           {
-            nixpkgs.overlays = [ (import ./pkgs) ];
+            nixpkgs.overlays = [ (import ./pkgs) (import ./overlays) ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.ithinuel.imports = [
