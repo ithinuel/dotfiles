@@ -29,7 +29,12 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.ithinuel.imports = [
-              ./hosts/ithinuel-air/home-manager.nix
+              {
+                home = {
+                  username = "ithinuel";
+                  homeDirectory = "/Users/ithinuel";
+                };
+              }
               ./home
             ];
           }
@@ -39,10 +44,24 @@
 
       # Configuration for home-manager standalone on the vm machine
       # TODO: actually test this
-      homeConfigurations.vm = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.ithinuel = home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
-        modules = [ ./hosts/vm/home-manager.nix ];
+        modules = [
+          {
+            nixpkgs.overlays = [ (import ./pkgs) (import ./overlays) ];
+            home = {
+              username = "ithinuel";
+              homeDirectory = "/home/ithinuel";
+            };
+
+            services.gpg-agent = {
+              enable = true;
+              enableSshSupport = true;
+            };
+          }
+          ./home
+        ];
       };
     };
 }

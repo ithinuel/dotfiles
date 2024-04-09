@@ -14,6 +14,16 @@ let
     };
 in
 {
+  nixpkgs = {
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+    };
+  };
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  home.stateVersion = "23.11";
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -49,8 +59,8 @@ in
     gcc_multi
     usbutils
 
-    freecad
-    kicad
+    #freecad
+    #kicad
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
