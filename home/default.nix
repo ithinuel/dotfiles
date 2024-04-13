@@ -49,6 +49,7 @@ in
 
     # Nix language server
     nixd
+    nixpkgs-fmt
 
     # custom packages
     awthemes

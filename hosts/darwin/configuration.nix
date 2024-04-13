@@ -9,19 +9,6 @@
     auto-optimise-store = true;
   };
 
-  # Define a user account
-  users.users = {
-    ithinuel = {
-      home = "/Users/ithinuel";
-      shell = "${pkgs.zsh}/bin/zsh";
-
-      packages = with pkgs; [
-        # NOTE: Packages are installed via home-manager
-        home-manager
-      ];
-    };
-  };
-
   # Creates global /etc/zshrc that loads the nix-darwin environment
   programs.zsh.enable = true; # Important!
 

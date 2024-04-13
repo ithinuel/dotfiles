@@ -13,34 +13,50 @@
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, flake-utils, home-manager }:
+    let
+      darwin_template = username: {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/darwin/configuration.nix
+          ({ pkgs, ... }: {
+            nixpkgs.overlays = [ (import ./pkgs) (import ./overlays) ];
+            # Define a user account
+            users.users.${username} = {
+              home = "/Users/${username}";
+              shell = "${pkgs.zsh}/bin/zsh";
+
+              packages = with pkgs; [
+                # NOTE: Packages are installed via home-manager
+                home-manager
+                colima
+                docker
+                docker-credential-helpers
+              ];
+            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username}.imports = [
+              {
+                home = {
+                  inherit username;
+                  homeDirectory = "/Users/${username}";
+                };
+              }
+              ./home
+            ];
+          })
+          home-manager.darwinModules.home-manager
+        ];
+      };
+    in
     (flake-utils.lib.eachDefaultSystem (system: {
       formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
     })) //
     {
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#ithinuel-air
-      darwinConfigurations."ithinuel-air" = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/ithinuel-air/configuration.nix
-          home-manager.darwinModules.home-manager
-          {
-            nixpkgs.overlays = [ (import ./pkgs) (import ./overlays) ];
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.ithinuel.imports = [
-              {
-                home = {
-                  username = "ithinuel";
-                  homeDirectory = "/Users/ithinuel";
-                };
-              }
-              ./home
-            ];
-          }
-        ];
-      };
-      darwinPackages = self.darwinConfigurations."ithinuel-air".pkgs;
+      # $ darwin-rebuild build --flake .#hostname
+      darwinConfigurations."ithinuel-air" = nix-darwin.lib.darwinSystem (darwin_template "ithinuel");
+      darwinConfigurations."mbp" = nix-darwin.lib.darwinSystem (darwin_template "wilcha02");
 
       # Configuration for home-manager standalone on the vm machine
       # TODO: actually test this
