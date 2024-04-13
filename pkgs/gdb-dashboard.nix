@@ -13,7 +13,7 @@ tcl.mkTclDerivation rec {
 
   enableParallelBuilding = true;
 
-  postInstall = ''
+  installPhase = ''
     mkdir -p $out
     cp .gdbinit $out
   '';

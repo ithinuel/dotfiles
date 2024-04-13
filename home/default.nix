@@ -14,12 +14,8 @@ let
     };
 in
 {
-  nixpkgs = {
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-  };
+  # Disable if you don't want unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.11";
@@ -54,14 +50,14 @@ in
     # custom packages
     awthemes
     gdb-dashboard
-    exa
+    eza
     fd-find
   ] ++ lib.optionals pkgs.stdenv.isLinux [
-    gcc_multi
     usbutils
 
-    #freecad
-    #kicad
+    # gcc_multi # not supported on aarch64
+    #freecad # something makes it rebuild and it’s taking ages
+    #kicad # something makes it rebuild and it’s taking ages
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -97,7 +93,7 @@ in
     TCLLIBPATH = "${pkgs.awthemes}";
   };
 
-  # Let Home Manager install and manage itself.
+  # Let home-manager manage itself
   programs.home-manager.enable = true;
   programs.neovim = {
     enable = true;
@@ -163,8 +159,10 @@ in
 
       rg = "rg -p --no-heading --follow";
       fd = "fd --no-ignore";
-      ll = "exa -l --git";
-      lla = "exa -la --git";
+      ll = "eza -l --git";
+      lla = "eza -la --git";
+      ls = "eza";
+      lsa = "eza -lah --git";
       cat = "bat -p";
       j = "just";
 
