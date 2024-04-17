@@ -12,6 +12,7 @@ let
         hash = hash;
       };
     };
+  selected-pinentry = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gnome;
 in
 {
   # Disable if you don't want unfree packages
@@ -27,6 +28,8 @@ in
     zsh
     gitFull
     htop
+    gnupg
+    selected-pinentry
 
     # embedded dev tools
     minicom
@@ -83,6 +86,8 @@ in
     '';
     ".config/nvim/coc-settings.json".source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/Documents/nix-config/home/coc-settings.json";
+  } // lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
+    ".gnupg/gpg-agent.conf" = "pinentry-program ${pkgs.pinentry_mac.outPath}/bin/pinentry-mac";
   };
 
   home.sessionVariables = {
