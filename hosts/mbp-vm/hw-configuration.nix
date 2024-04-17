@@ -3,8 +3,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "usbhid" "usb_storage" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
+  # boot.initrd is provided by /profiles/qemu-guest.nix
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
