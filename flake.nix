@@ -16,81 +16,107 @@
 
   outputs = inputs@{ flake-utils, ... }:
     let
-      hm-template = { username, isDarwin ? false }: ({ pkgs, ... }: {
-        nixpkgs.overlays = [ (import ./pkgs) (import ./overlays) ];
-        users.defaultUserShell = pkgs.zsh;
-        users.users.${username} = {
-          description = "Wilfried Chauveau";
-        };
-
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users.${username} = {
-          imports = [ ./home ];
-          home.username = username;
-          home.homeDirectory = "/" + (if isDarwin then "Users" else "home") + "/${username}";
-        };
-      });
-      darwin_template = username: {
-        specialArgs = { inherit inputs; };
+      darwin-template = username: host: inputs.nix-darwin.lib.darwinSystem {
         modules = [
-          ./hosts/darwin/configuration.nix
+          ./hosts/${host}
           ({ pkgs, ... }: {
             # Define a user account
             users.users.${username}.packages = with pkgs; [
               # NOTE: Packages are installed via home-manager
               home-manager
               colima
-              docker
-              docker-credential-helpers
             ];
           })
-          inputs.home-manager.darwinModules.home-manager
-          (hm-template { inherit username; })
+        ];
+      };
+
+      nixos-template = username: host: inputs.nixpkgs.lib.nixosSystem {
+        modules = [
+          # machine specific stuffs
+          ./hosts/${host}
+          inputs.disko.nixosModules.disko
+          # user generic config
+          ({ pkgs, ... }: {
+            # This value determines the NixOS release from which the default
+            # settings for stateful data, like file locations and database versions
+            # on your system were taken. It‘s perfectly fine and recommended to leave
+            # this value at the release version of the first install of this system.
+            # Before changing this value read the documentation for this option
+            # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+            system.stateVersion = "23.11"; # Did you read the comment?
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+            users.defaultUserShell = pkgs.zsh;
+            users.groups.plugdev = { };
+            users.users."${username}" = {
+              shell = pkgs.zsh;
+              initialPassword = "${username}";
+              description = "Wilfried Chauveau";
+              isNormalUser = true;
+              extraGroups = [ "networkmanager" "wheel" "plugdev" "dialout" ];
+              packages = with pkgs; [
+                home-manager
+                firefox
+                tilix
+              ];
+            };
+
+            # Enable automatic login for the user.
+            services.xserver.displayManager.autoLogin.enable = true;
+            services.xserver.displayManager.autoLogin.user = "ithinuel";
+
+            # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+            systemd.services."getty@tty1".enable = false;
+            systemd.services."autovt@tty1".enable = false;
+
+            # make udev map debug probes to plugdev
+            services.udev.packages = [ pkgs.picoprobe-udev-rules ];
+
+            virtualisation.docker.rootless = {
+                enable = true;
+                setSocketVariable = true;
+            };
+
+            nixpkgs.config.allowUnfree = true;
+            environment.shells = [ pkgs.zsh ];
+            programs.zsh.enable = true;
+            programs.gnupg.agent = {
+              enable = true;
+              enableSSHSupport = true;
+            };
+          })
+        ];
+      };
+
+      homemgr-template = username: pkgs: inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ({ pkgs, ... }: {
+            nixpkgs.overlays = [ (import ./pkgs) (import ./overlays) ];
+            home = {
+              inherit username;
+              homeDirectory = (if pkgs.stdenv.isLinux then "/home" else "/Users") + "/${username}";
+            };
+
+            services.gpg-agent.enable = true;
+          })
+          ./home
         ];
       };
     in
     (flake-utils.lib.eachDefaultSystem (system: {
       formatter = inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+
+      packages.homeConfigurations.ithinuel = homemgr-template "ithinuel" inputs.nixpkgs.legacyPackages.${system};
+      packages.homeConfigurations.wilcha02 = homemgr-template "wilcha02" inputs.nixpkgs.legacyPackages.${system};
     })) //
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#hostname
-      darwinConfigurations."ithinuel-air" = inputs.nix-darwin.lib.darwinSystem (darwin_template "ithinuel");
+      darwinConfigurations.ithinuel-air = darwin-template "ithinuel" "ithinuel-air";
+      darwinConfigurations.mbp = darwin-template "wilcha02" "mpb";
 
-      nixosConfigurations.mbp-vm = inputs.nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          # machine specific stuffs
-          ./hosts/mbp-vm
-          inputs.disko.nixosModules.disko
-          # user generic config
-          inputs.home-manager.nixosModules.home-manager
-          (hm-template { username = "wilcha02"; })
-          ({ pkgs, ... }: {
-            users.groups.plugdev = { };
-            users.users.wilcha02 = {
-              initialPassword = "wilcha02";
-              isNormalUser = true;
-              extraGroups = [ "networkmanager" "wheel" "plugdev" "dialout" ];
-              packages = with pkgs; [
-                firefox
-                tilix
-                #  thunderbird
-              ];
-            };
-          })
-        ];
-      };
-      nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          # machine specific stuffs
-          #./hosts/nixos
-          # user generic config
-          #inputs.home-manager.nixosModules.home-manager
-          #(hm-template { username = "ithinuel"; })
-        ];
-      };
+      nixosConfigurations.nixos = nixos-template "ithinuel" "nixos";
+      nixosConfigurations.nixmu = nixos-template "wilcha02" "nixmu";
+      nixosConfigurations.nixlel = nixos-template "wilcha02" "nixlel";
     };
 }

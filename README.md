@@ -1,4 +1,19 @@
-## Install on darwin
+## Install on VMware
+
+```
+# does not work "no enough space on device"
+# It seems to be using the live-iso store instead of the target in /mnt
+sudo nix run 'github:nix-community/disko#disko-install' -- --flake 'github:ithinuel/dotfiles/nixed#nixos' --disk main /dev/sda
+```
+alternatively:
+```
+nix --experimental-features 'nix-command flakes' shell github:nix-communtiy/disko
+
+sudo nix --experimental-features 'nix-command flakes' run github:nix-communtiy/disko#disko -- -m disko -f github:ithinuel/dotfiles/nixed#nixos
+sudo nixos-install --flake github:ithinuel/dotfiles/nixed#nixos --root /mnt
+```
+
+## Install on Darwin
 
 ```
 nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake .

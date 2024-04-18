@@ -12,7 +12,6 @@ let
         hash = hash;
       };
     };
-  selected-pinentry = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gnome;
 in
 {
   # Disable if you don't want unfree packages
@@ -27,9 +26,10 @@ in
     # terminal tools
     zsh
     gitFull
+    git-lfs
     htop
     gnupg
-    selected-pinentry
+    docker-credential-helpers
 
     # embedded dev tools
     minicom
@@ -55,7 +55,8 @@ in
     gdb-dashboard
     eza
     fd-find
-  ] ++ lib.optionals pkgs.stdenv.isLinux [
+  ] ++ lib.optional pkgs.stdenv.isDarwin pinentry_mac
+  ++ lib.optionals pkgs.stdenv.isLinux [
     usbutils
 
     # gcc_multi # not supported on aarch64
