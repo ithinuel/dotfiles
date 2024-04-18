@@ -29,6 +29,7 @@ in
     git-lfs
     htop
     gnupg
+    docker
     docker-credential-helpers
 
     # embedded dev tools
