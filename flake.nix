@@ -18,7 +18,7 @@
     let
       darwin-template = username: host: inputs.nix-darwin.lib.darwinSystem {
         modules = [
-          ./hosts/${host}
+          ./hosts/darwin
           ({ pkgs, ... }: {
             # Define a user account
             users.users.${username}.packages = with pkgs; [
@@ -73,8 +73,8 @@
             services.udev.packages = [ pkgs.picoprobe-udev-rules ];
 
             virtualisation.docker.rootless = {
-                enable = true;
-                setSocketVariable = true;
+              enable = true;
+              setSocketVariable = true;
             };
 
             nixpkgs.config.allowUnfree = true;
@@ -98,8 +98,6 @@
               inherit username;
               homeDirectory = (if pkgs.stdenv.isLinux then "/home" else "/Users") + "/${username}";
             };
-
-            services.gpg-agent.enable = true;
           })
           ./home
         ];
