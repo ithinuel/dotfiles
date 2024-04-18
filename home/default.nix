@@ -88,7 +88,7 @@ in
     ".config/nvim/coc-settings.json".source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/Documents/nix-config/home/coc-settings.json";
   } // lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
-    ".gnupg/gpg-agent.conf" = "pinentry-program ${pkgs.pinentry_mac.outPath}/bin/pinentry-mac";
+    ".gnupg/gpg-agent.conf".text = "pinentry-program ${pkgs.pinentry_mac.outPath}/bin/pinentry-mac";
   };
 
   home.sessionVariables = {
