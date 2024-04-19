@@ -56,14 +56,15 @@ in
     gdb-dashboard
     eza
     fd-find
-  ] ++ lib.optional pkgs.stdenv.isDarwin pinentry_mac
-  ++ lib.optionals pkgs.stdenv.isLinux [
+  ] ++
+  lib.optionals pkgs.stdenv.isLinux [
     usbutils
 
-    # gcc_multi # not supported on aarch64
-    #freecad # something makes it rebuild and it’s taking ages
-    #kicad # something makes it rebuild and it’s taking ages
-  ];
+    freecad
+    kicad
+  ] ++
+  lib.optional pkgs.stdenv.isDarwin pinentry_mac ++
+  lib.optional (pkgs.system == "x86_64-linux") gcc_multi;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
