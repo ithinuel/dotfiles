@@ -31,6 +31,7 @@ in
     gnupg
     docker
     docker-credential-helpers
+    file
 
     # embedded dev tools
     minicom
@@ -62,6 +63,7 @@ in
 
     freecad
     kicad
+    gnome.ghex
   ] ++
   lib.optional pkgs.stdenv.isDarwin pinentry_mac ++
   lib.optional (pkgs.system == "x86_64-linux") gcc_multi;
