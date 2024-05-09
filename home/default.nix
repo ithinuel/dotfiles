@@ -164,8 +164,9 @@ in
       gdto = "git difftool -y";
       gsti = "gst --ignored";
       gfa = "git fetch --all --recurse-submodules --prune";
+      gbvv = "git branch -vv";
 
-      rg = "rg -p --no-heading --follow";
+      rg = "rg -p --no-heading --follow --type-add 'kconf:Kconfig' --type-add 'dtss:*.dts' --type-add 'dtsi:*.dtsi' --type-add 'dts:include:dtss,dtsi'";
       fd = "fd --no-ignore";
       ll = "eza -l --git";
       lla = "eza -la --git";
