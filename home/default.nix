@@ -63,6 +63,9 @@ in
 
     freecad
     kicad
+    calibre
+
+    libreoffice
     gnome.ghex
   ] ++
   lib.optional pkgs.stdenv.isDarwin pinentry_mac ++
@@ -172,7 +175,7 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableVteIntegration = true;
 

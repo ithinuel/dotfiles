@@ -2,10 +2,10 @@
   description = "Flake configuration for my systems";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/24.05";
     nix-darwin.url = "github:LnL7/nix-darwin";
     flake-utils.url = "github:numtide/flake-utils";
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     disko.url = "github:nix-community/disko/master";
 
     # reduce duplication
@@ -64,8 +64,8 @@
             };
 
             # Enable automatic login for the user.
-            services.xserver.displayManager.autoLogin.enable = true;
-            services.xserver.displayManager.autoLogin.user = username;
+            services.displayManager.autoLogin.enable = true;
+            services.displayManager.autoLogin.user = username;
 
             # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
             systemd.services."getty@tty1".enable = false;
