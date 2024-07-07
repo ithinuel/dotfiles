@@ -116,6 +116,7 @@
       darwinConfigurations.mbp = darwin-template "wilcha02" "mpb";
 
       nixosConfigurations.nixos = nixos-template "ithinuel" "nixos";
+      nixosConfigurations.nixbox = nixos-template "ithinuel" "nixbox";
       nixosConfigurations.nixmu = nixos-template "wilcha02" "nixmu";
       nixosConfigurations.nixlel = nixos-template "wilcha02" "nixlel";
     };
