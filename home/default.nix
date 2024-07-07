@@ -91,6 +91,22 @@ in
     '';
     ".config/nvim/coc-settings.json".source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/Documents/nix-config/home/coc-settings.json";
+    ".config/ripgreprc".text = ''
+      -p
+      --no-heading
+      --follow
+      --type-add='kconf:Kconfig'
+      --type-add='dtss:*.dts'
+      --type-add='dtsi:*.dtsi'
+      --type-add='dts:include:dtss,dtsi'
+      --type-add='ld:*.ld'
+      --type-add='rustld:*.x'
+      --type-add='linker:include:ld,rustld'
+    '';
+    ".rgignore".text = ''
+      !.gitlab
+      !.github
+    '';
   } // lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
     ".gnupg/gpg-agent.conf".text = "pinentry-program ${pkgs.pinentry_mac.outPath}/bin/pinentry-mac";
   };
@@ -101,6 +117,7 @@ in
     CARGO_PATH = "\${HOME}/.cargo/bin";
     PATH = "\${PATH}:\${CARGO_PATH}";
     TCLLIBPATH = "${pkgs.awthemes}";
+    RIPGREP_CONFIG_PATH = "\${HOME}/.config/ripgreprc";
   };
 
   # Let home-manager manage itself
@@ -168,7 +185,7 @@ in
       gfa = "git fetch --all --recurse-submodules --prune";
       gbvv = "git branch -vv";
 
-      rg = "rg -p --no-heading --follow --type-add 'kconf:Kconfig' --type-add 'dtss:*.dts' --type-add 'dtsi:*.dtsi' --type-add 'dts:include:dtss,dtsi'";
+      rg = "rg -p --no-heading --follow --type-add 'kconf:Kconfig' --type-add 'dtss:*.dts' --type-add 'dtsi:*.dtsi' --type-add 'dts:include:dtss,dtsi' --type-add 'ld:*.ld' --type-add 'rustld:*.x' --type-add 'linker:include:ld,rustld'";
       fd = "fd --no-ignore";
       ll = "eza -l --git";
       lla = "eza -la --git";
@@ -196,6 +213,11 @@ in
   };
   programs.git = {
     enable = true;
+    lfs.enable = true;
     package = pkgs.gitFull;
+    extraConfig = {
+        init.defaultBranch = "main";
+        rebase.autoSquash = true;
+    };
   };
 }
