@@ -32,6 +32,7 @@ in
     docker
     docker-credential-helpers
     file
+    graphviz
 
     # embedded dev tools
     minicom
@@ -60,6 +61,7 @@ in
   ] ++
   lib.optionals pkgs.stdenv.isLinux [
     usbutils
+    xclip
 
     freecad
     kicad
@@ -98,13 +100,13 @@ in
       -p
       --no-heading
       --follow
-      --type-add='kconf:Kconfig'
-      --type-add='dtss:*.dts'
-      --type-add='dtsi:*.dtsi'
-      --type-add='dts:include:dtss,dtsi'
-      --type-add='ld:*.ld'
-      --type-add='rustld:*.x'
-      --type-add='linker:include:ld,rustld'
+      --type-add=kconf:Kconfig
+      --type-add=dtss:*.dts
+      --type-add=dtsi:*.dtsi
+      --type-add=dts:include:dtss,dtsi
+      --type-add=ld:*.ld
+      --type-add=rustld:*.x
+      --type-add=linker:include:ld,rustld
     '';
     ".rgignore".text = ''
       !.gitlab
@@ -188,7 +190,6 @@ in
       gfa = "git fetch --all --recurse-submodules --prune";
       gbvv = "git branch -vv";
 
-      rg = "rg -p --no-heading --follow --type-add 'kconf:Kconfig' --type-add 'dtss:*.dts' --type-add 'dtsi:*.dtsi' --type-add 'dts:include:dtss,dtsi' --type-add 'ld:*.ld' --type-add 'rustld:*.x' --type-add 'linker:include:ld,rustld'";
       fd = "fd --no-ignore";
       ll = "eza -l --git";
       lla = "eza -la --git";
