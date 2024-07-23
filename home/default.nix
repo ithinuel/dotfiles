@@ -94,8 +94,10 @@ in
 
       end
     '';
+
     ".config/nvim/coc-settings.json".source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/Documents/nix-config/home/coc-settings.json";
+
     ".config/ripgreprc".text = ''
       -p
       --no-heading
@@ -108,6 +110,7 @@ in
       --type-add=rustld:*.x
       --type-add=linker:include:ld,rustld
     '';
+
     ".rgignore".text = ''
       !.gitlab
       !.github
@@ -143,7 +146,7 @@ in
       nvim-surround
 
       ctrlp-vim
-      skim-vim
+      skim
       file-line
       nerdcommenter
       markdown-preview-nvim
@@ -190,7 +193,7 @@ in
       gfa = "git fetch --all --recurse-submodules --prune";
       gbvv = "git branch -vv";
 
-      fd = "fd --no-ignore";
+      fd = "fd -H";
       ll = "eza -l --git";
       lla = "eza -la --git";
       ls = "eza";

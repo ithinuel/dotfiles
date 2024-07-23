@@ -85,6 +85,9 @@ endif
 " =================================================================================================
 " Plugins config
 
+" skim
+let $SKIM_DEFAULT_COMMAND = "fd -H --type f || git ls-tree -r --name-only HEAD || rg --files || ag -l -g \"\" || find ."
+
 " nvim-surround
 lua require("nvim-surround").setup()
 
