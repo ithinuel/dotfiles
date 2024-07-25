@@ -58,6 +58,7 @@ in
 
     # custom packages
     awthemes
+    nerdfonts
     gdb-dashboard
     eza
     fd-find
@@ -150,6 +151,7 @@ in
       vim-markdown
       vim-signify
       nvim-surround
+      which-key-nvim
 
       ctrlp-vim
       skim
@@ -161,21 +163,22 @@ in
       vim-airline
       vim-airline-themes
 
+      coc-clangd
+      coc-cmake
       coc-docker
       coc-git
-      coc-toml
-      coc-yaml
       coc-json
-      coc-cmake
-      coc-clangd
-      coc-pyright
+      coc-lua
       coc-markdownlint
+      coc-nvim
+      coc-pyright
       coc-rust-analyzer
       coc-spell-checker
-      coc-nvim
+      coc-toml
+      coc-yaml
 
-      (vimPluginFromGitHub "LunarWatcher" "auto-pairs" "v4.0.2"
-        "sha256-dxWcbmXPeq87vnUgNFoXIqhIHMjmYoab2vhm1ijp9MM")
+      #(vimPluginFromGitHub "LunarWatcher" "auto-pairs" "v4.0.2"
+      #  "sha256-dxWcbmXPeq87vnUgNFoXIqhIHMjmYoab2vhm1ijp9MM")
       (vimPluginFromGitHub "Badacadabra" "vim-archery"
         "0084b5d1199deb5c671e0e6017e9a0224f66f236"
         "sha256-z2qfEHz+CagbP5GBVzARsP1+H6LjBEna6x1L0+ynzbk")
@@ -196,6 +199,7 @@ in
       gg = "git gui";
       gdto = "git difftool -y";
       gsti = "gst --ignored";
+      gstau = "gsta -u";
       gfa = "git fetch --all --recurse-submodules --prune";
       gbvv = "git branch -vv";
 

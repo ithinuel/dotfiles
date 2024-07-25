@@ -1,22 +1,29 @@
-syntax on
-filetype plugin indent on
+" Color scheme
+" enable all colors
+if has('termguicolors')
+    set termguicolors
+else
+    set &t_CO=256
+endif
+colorscheme archery
+hi link NormalFloat Float
 
 " enable all 24bit colors
-set termguicolors
 set hidden
-set number
-set relativenumber
 set encoding=utf-8
+set cursorline
+
+" Right margin
+let &colorcolumn="100,".join(range(120, 999),",")
 set nowrap
 set sidescroll=8
-set cursorline
+set showbreak=↪ " if break is enabled, mark break points with this character
 " set breakindent
 " set breakindentopt=sbr
-set showbreak=↪
 
 " prevents from saving the pwd in the view file. This leads to pwd being
 " different from pwd of the starting shell
-set viewoptions-=curdir 
+set viewoptions-=curdir
 
 " tab and indentation management
 set tabstop=4
@@ -28,16 +35,16 @@ set foldmethod=syntax " Fold on syntax
 set foldcolumn=1 " Show the fold column
 set foldlevel=99 " Level above will be folded by default
 
-set smartcase
 set ruler
+set number
+" set relativenumber
+
+set smartcase
 set incsearch
 set hlsearch
 
 " set cscopetag
 set mouse=a
-
-colorscheme archery
-"hi Normal guibg=NONE ctermbg=NONE
 
 " enable per project vimrc
 set exrc
@@ -50,9 +57,6 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
 
-" show right margin
-let &colorcolumn="100,".join(range(120, 999),",")
-
 " Use a blinking upright bar cursor in Insert mode, a blinking block in normal
 if &term == 'xterm-256color' || &term == 'screen-256color' || &term == 'rxvt-256color'
     let &t_SI = "\<Esc>[5 q" " blinking thin vertical bar in insert mode
@@ -62,6 +66,10 @@ endif
 
 " show trailing spaces and nbsp
 set list listchars=tab:»\ ,trail:·,nbsp:⎵,precedes:<,extends:>
+
+" syntax highlighting features
+syntax on
+filetype plugin indent on
 
 " ===============================================
 " Coc recommended config
@@ -88,8 +96,10 @@ endif
 " skim
 let $SKIM_DEFAULT_COMMAND = "fd -H --type f || git ls-tree -r --name-only HEAD || rg --files || ag -l -g \"\" || find ."
 
-" nvim-surround
+" lua plugins loading
 lua require("nvim-surround").setup()
+lua require("which-key").setup({ preset = 'modern' })
+
 
 " ctrl-p
 let g:ctrlp_types = ['buf', 'mru', 'fil']
