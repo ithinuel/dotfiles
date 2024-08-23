@@ -34,6 +34,9 @@ in
     file
     graphviz
 
+    # extratools for coding
+    python311Packages.autopep8
+
     # embedded dev tools
     minicom
     clang-tools
