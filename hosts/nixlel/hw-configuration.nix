@@ -6,6 +6,13 @@
   boot.extraModulePackages = [ ];
 
   hardware.parallels.enable = true;
+  hardware.parallels.package = config.boot.kernelPackages.prl-tools.overrideAttrs(rec {
+      version = "19.4.1-54985";
+      src = builtins.fetchurl {
+        url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
+        sha256 = "VBHCsxaMI6mfmc/iQ4hJW/592rKck9HilTX2Hq7Hb5s=";
+      };
+  });
 
   # Skip filesystem, provided by disko
 
