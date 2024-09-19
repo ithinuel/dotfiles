@@ -118,6 +118,9 @@ in
       !.gitlab
       !.github
     '';
+    ".config/git/ignore".text = ''
+    .DS_Store
+    '';
   } // lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
     ".gnupg/gpg-agent.conf".text = "pinentry-program ${pkgs.pinentry_mac.outPath}/bin/pinentry-mac";
   };
