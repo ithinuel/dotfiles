@@ -98,8 +98,8 @@ let $SKIM_DEFAULT_COMMAND = "fd -H --type f || git ls-tree -r --name-only HEAD |
 
 " lua plugins loading
 lua require("nvim-surround").setup()
+lua require("nvim-autopairs").setup()
 lua require("which-key").setup({ preset = 'modern' })
-
 
 " ctrl-p
 let g:ctrlp_types = ['buf', 'mru', 'fil']

@@ -151,6 +151,7 @@ in
       vim-markdown
       vim-signify
       nvim-surround
+      nvim-autopairs
       which-key-nvim
 
       ctrlp-vim

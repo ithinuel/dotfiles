@@ -56,3 +56,14 @@ nix --experimental-features 'nix-command flakes'  run nix-darwin -- switch --fla
 home-manager --flake $flake#<username> switch
 ```
 
+# Maintenance
+
+From time to time it’s good to clean up the store. For this a few commands come in handy:
+- `nixos-rebuild --flake $flake#<host> list-generations`: lists the generation (found in grub)
+  Unwanted generations can be removed with `sudo rm /nix/var/nix/profiles/system-<gen>-link`.  
+  Then run `nixos-rebuild --flake $flake#<host> switch` to force an update of the grub menu.
+- `home-manager --flake $flake#<username> generations` and  
+  `home-manager --flake $flake#<username> expire-genrations <some duration>` to remove unwanted
+  generations.
+- `nix profile wipe-history` to get rid of old profiles.
+- `nix store gc` to remove all unused packages from the store.
