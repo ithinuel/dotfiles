@@ -100,7 +100,7 @@ in
     '';
 
     ".config/nvim/coc-settings.json".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/Documents/nix-config/home/coc-settings.json";
+      "${config.home.homeDirectory}/Documents/dotfiles/home/coc-settings.json";
 
     ".config/ripgreprc".text = ''
       -p
