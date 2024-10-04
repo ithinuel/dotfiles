@@ -50,7 +50,7 @@ in
     ripgrep
     skim
     bat
-    cargo-watch
+    bacon
 
     # Nix language server
     nixd
@@ -120,7 +120,7 @@ in
       !.github
     '';
     ".config/git/ignore".text = ''
-    .DS_Store
+      .DS_Store
     '';
   } // lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
     ".gnupg/gpg-agent.conf".text = "pinentry-program ${pkgs.pinentry_mac.outPath}/bin/pinentry-mac";
@@ -234,8 +234,8 @@ in
     lfs.enable = true;
     package = pkgs.gitFull;
     extraConfig = {
-        init.defaultBranch = "main";
-        rebase.autoSquash = true;
+      init.defaultBranch = "main";
+      rebase.autoSquash = true;
     };
   };
 }
