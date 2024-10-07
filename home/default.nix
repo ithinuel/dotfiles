@@ -135,6 +135,14 @@ in
     RIPGREP_CONFIG_PATH = "\${HOME}/.config/ripgreprc";
   };
 
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.defaultApplications = {
+    "x-scheme-handler/http" = [ "firefox.desktop" ];
+    "x-scheme-handler/https" = [ "firefox.desktop" ];
+    "text/html" = [ "firefox.desktop" ];
+    "application/pdf" = [ "evince.desktop" "firefox.desktop" ];
+  };
+
   # Let home-manager manage itself
   programs.home-manager.enable = true;
   programs.neovim = {
