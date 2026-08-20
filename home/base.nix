@@ -359,7 +359,6 @@ in
   '';
   programs.ruff.enable = true;
   programs.ruff.settings = { };
-  programs.nix-index.enable = true;
   programs.carapace.enable = true;
 
   services.home-manager.autoExpire.enable = isLinux;
