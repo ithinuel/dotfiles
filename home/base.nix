@@ -233,7 +233,7 @@ in
         modified = "📝";
         staged = "[++\($count\)](green)";
         renamed = "👅";
-        deleted = "🗑";
+        deleted = "🗑️";
       };
 
       hostname = {
