@@ -166,6 +166,9 @@ in
       enable = true;
       plugins = [ "git" ];
     };
+    initContent = lib.mkAfter ''
+      autoload -U zmv
+    '';
   };
 
   programs.starship = {
