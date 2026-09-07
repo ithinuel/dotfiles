@@ -1,0 +1,74 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            3f:86:3e:7c:f4:41:24:30:0f:3e:81:f5:fb:5b:bf:21:bb:65:05:c1
+        Signature Algorithm: ecdsa-with-SHA384
+        Issuer: C=GB, ST=Cambridgeshire, L=Cambridge, CN=home.ithinuel.me
+        Validity
+            Not Before: Aug 28 21:53:11 2026 GMT
+            Not After : Aug 28 21:53:11 2031 GMT
+        Subject: C=GB, ST=Cambridgeshire, L=Cambridge, CN=ollama.home.ithinuel.me
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (384 bit)
+                pub:
+                    04:fb:f9:9a:41:2d:83:a0:84:3c:86:07:95:97:f2:
+                    9e:1d:44:d2:4e:c2:b3:9d:cd:59:cf:80:f5:b2:d3:
+                    55:d9:9b:80:2e:2e:de:bd:c9:e7:5e:ed:d0:cc:98:
+                    9b:f2:e9:f3:a3:31:31:68:b2:c5:0d:7a:93:9a:7e:
+                    b6:38:15:86:61:c7:b7:a1:ea:fb:9a:26:8d:4e:ee:
+                    b3:a1:2e:22:d2:a3:06:0c:30:6a:0a:ee:4b:fd:e7:
+                    71:49:c6:44:9f:37:5b
+                ASN1 OID: secp384r1
+                NIST CURVE: P-384
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:FALSE
+            X509v3 Subject Alternative Name: 
+                DNS:ollama.home.ithinuel.me
+            X509v3 Subject Key Identifier: 
+                75:AD:4D:A5:3F:74:E1:AF:17:ED:EA:C3:53:64:77:10:CE:DC:4E:3B
+            X509v3 Authority Key Identifier: 
+                58:E9:C9:F9:2B:00:41:A2:2E:A5:32:7D:8A:E5:5E:FB:E4:43:1F:D9
+    Signature Algorithm: ecdsa-with-SHA384
+    Signature Value:
+        30:64:02:30:36:44:10:9d:d7:2f:a8:13:33:6e:c1:3c:1c:20:
+        66:5a:5e:a5:66:62:3e:2e:5f:c0:33:ab:97:44:44:cc:fb:9a:
+        4d:08:bb:64:3f:86:80:f6:0f:0c:95:27:d3:53:51:25:02:30:
+        49:7c:21:b9:ef:d3:29:16:d8:f7:12:e1:ae:11:22:a8:13:94:
+        25:0f:d5:29:38:25:34:0e:c7:1b:df:ad:6f:8c:d9:db:ea:ac:
+        4c:bc:d4:40:0a:57:0f:38:2f:ce:e0:10
+-----BEGIN CERTIFICATE-----
+MIICYzCCAeqgAwIBAgIUP4Y+fPRBJDAPPoH1+1u/IbtlBcEwCgYIKoZIzj0EAwMw
+VTELMAkGA1UEBhMCR0IxFzAVBgNVBAgMDkNhbWJyaWRnZXNoaXJlMRIwEAYDVQQH
+DAlDYW1icmlkZ2UxGTAXBgNVBAMMEGhvbWUuaXRoaW51ZWwubWUwHhcNMjYwODI4
+MjE1MzExWhcNMzEwODI4MjE1MzExWjBcMQswCQYDVQQGEwJHQjEXMBUGA1UECAwO
+Q2FtYnJpZGdlc2hpcmUxEjAQBgNVBAcMCUNhbWJyaWRnZTEgMB4GA1UEAwwXb2xs
+YW1hLmhvbWUuaXRoaW51ZWwubWUwdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAT7+ZpB
+LYOghDyGB5WX8p4dRNJOwrOdzVnPgPWy01XZm4AuLt69yede7dDMmJvy6fOjMTFo
+ssUNepOafrY4FYZhx7eh6vuaJo1O7rOhLiLSowYMMGoK7kv953FJxkSfN1ujdDBy
+MAwGA1UdEwEB/wQCMAAwIgYDVR0RBBswGYIXb2xsYW1hLmhvbWUuaXRoaW51ZWwu
+bWUwHQYDVR0OBBYEFHWtTaU/dOGvF+3qw1NkdxDO3E47MB8GA1UdIwQYMBaAFFjp
+yfkrAEGiLqUyfYrlXvvkQx/ZMAoGCCqGSM49BAMDA2cAMGQCMDZEEJ3XL6gTM27B
+PBwgZlpepWZiPi5fwDOrl0REzPuaTQi7ZD+GgPYPDJUn01NRJQIwSXwhue/TKRbY
+9xLhrhEiqBOUJQ/VKTglNA7HG9+tb4zZ2+qsTLzUQApXDzgvzuAQ
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+MIIC3zCCAmSgAwIBAgIUY9mtVz7FsiAwx3BTci8chQ6BUfcwCgYIKoZIzj0EAwMw
+VTELMAkGA1UEBhMCR0IxFzAVBgNVBAgMDkNhbWJyaWRnZXNoaXJlMRIwEAYDVQQH
+DAlDYW1icmlkZ2UxGTAXBgNVBAMMEGhvbWUuaXRoaW51ZWwubWUwHhcNMjYwNzA4
+MDQ0NTMzWhcNMzYwNzA3MDQ0NTMzWjBVMQswCQYDVQQGEwJHQjEXMBUGA1UECAwO
+Q2FtYnJpZGdlc2hpcmUxEjAQBgNVBAcMCUNhbWJyaWRnZTEZMBcGA1UEAwwQaG9t
+ZS5pdGhpbnVlbC5tZTB2MBAGByqGSM49AgEGBSuBBAAiA2IABMuCSPY+KLJZr0bo
++kFuWKQ8lU+ZHHguQeIq4B7HkBtc1u47JAQxR/5J8q5SG7QEJh9Ufr00CMP7aekZ
+uCOlpU0Ool20P6fqsCEvxl2wqk6Iu8FdFsDvln4ers9Mx6hWKKOB9DCB8TASBgNV
+HRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBBjA7BgNVHR8ENDAyMDCgLqAs
+hipodHRwOi8vZGlza3N0YXRpb24uaG9tZS5pdGhpbnVlbC5tZS9jYS5jcmwwKAYD
+VR0RBCEwH4Edd2lsZnJpZWQuY2hhdXZlYXVAaXRoaW51ZWwubWUwRQYDVR0eAQH/
+BDswOaA3MAiCBi5sb2NhbDATghEuaG9tZS5pdGhpbnVlbC5tZTAKhwjAqAoA////
+ADAKhwjAqGMA////ADAdBgNVHQ4EFgQUWOnJ+SsAQaIupTJ9iuVe++RDH9kwCgYI
+KoZIzj0EAwMDaQAwZgIxANJYbdTD+HVLJ8UUEHOvYOUIx9T/gDJMXrkxOCZEyslN
+Z7LpaxI187G1y8Uoe+usEAIxAKEhkM6pUh4bAnYNo/I//nurv7pX9CJewH1zOtRN
+WUO8/ZweNnv8BJ5U3qsYIYCQ0w==
+-----END CERTIFICATE-----

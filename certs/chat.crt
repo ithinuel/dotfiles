@@ -1,0 +1,74 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            4b:96:0a:a9:25:ec:6d:be:d8:40:78:a4:fe:d7:56:52:ab:8b:7a:8d
+        Signature Algorithm: ecdsa-with-SHA384
+        Issuer: C=GB, ST=Cambridgeshire, L=Cambridge, CN=home.ithinuel.me
+        Validity
+            Not Before: Aug 28 21:53:16 2026 GMT
+            Not After : Aug 28 21:53:16 2031 GMT
+        Subject: C=GB, ST=Cambridgeshire, L=Cambridge, CN=chat.home.ithinuel.me
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (384 bit)
+                pub:
+                    04:2b:9c:ee:1c:39:63:a2:36:a3:40:bf:25:09:9e:
+                    56:e9:48:e5:5d:78:bc:90:a5:e0:a1:ed:7d:e6:e1:
+                    82:ab:9d:79:e9:7d:aa:ab:2c:5f:81:31:91:40:9a:
+                    13:2f:a6:33:1d:9a:66:40:97:19:6e:5a:ae:9a:59:
+                    30:82:c4:dd:b7:35:24:1a:92:ae:99:3b:ea:58:b3:
+                    c0:7e:a5:a3:5d:0a:fc:0c:54:c7:df:8b:5f:03:69:
+                    8f:7a:6b:1a:86:bf:34
+                ASN1 OID: secp384r1
+                NIST CURVE: P-384
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:FALSE
+            X509v3 Subject Alternative Name: 
+                DNS:chat.home.ithinuel.me
+            X509v3 Subject Key Identifier: 
+                C8:49:CC:D9:E1:6D:A2:05:97:54:09:4E:B9:7E:E1:5C:98:32:F2:9E
+            X509v3 Authority Key Identifier: 
+                58:E9:C9:F9:2B:00:41:A2:2E:A5:32:7D:8A:E5:5E:FB:E4:43:1F:D9
+    Signature Algorithm: ecdsa-with-SHA384
+    Signature Value:
+        30:65:02:30:2a:99:8c:ae:75:5e:03:53:16:9f:c0:13:06:dd:
+        2d:19:59:88:7b:75:3f:98:a8:fa:53:c8:7f:1d:6e:60:99:92:
+        09:9c:b8:e5:20:d0:8a:0c:3b:0d:a9:99:e7:56:45:3a:02:31:
+        00:91:94:dc:5c:c7:cf:13:0d:3f:ee:19:00:e8:1b:d7:c0:9c:
+        8a:61:80:54:07:11:78:e5:b0:7e:88:39:92:4f:55:75:64:d8:
+        fd:af:88:55:3f:0a:67:e3:34:6d:fe:4f:4e
+-----BEGIN CERTIFICATE-----
+MIICYDCCAeagAwIBAgIUS5YKqSXsbb7YQHik/tdWUquLeo0wCgYIKoZIzj0EAwMw
+VTELMAkGA1UEBhMCR0IxFzAVBgNVBAgMDkNhbWJyaWRnZXNoaXJlMRIwEAYDVQQH
+DAlDYW1icmlkZ2UxGTAXBgNVBAMMEGhvbWUuaXRoaW51ZWwubWUwHhcNMjYwODI4
+MjE1MzE2WhcNMzEwODI4MjE1MzE2WjBaMQswCQYDVQQGEwJHQjEXMBUGA1UECAwO
+Q2FtYnJpZGdlc2hpcmUxEjAQBgNVBAcMCUNhbWJyaWRnZTEeMBwGA1UEAwwVY2hh
+dC5ob21lLml0aGludWVsLm1lMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEK5zuHDlj
+ojajQL8lCZ5W6UjlXXi8kKXgoe195uGCq5156X2qqyxfgTGRQJoTL6YzHZpmQJcZ
+blqumlkwgsTdtzUkGpKumTvqWLPAfqWjXQr8DFTH34tfA2mPemsahr80o3IwcDAM
+BgNVHRMBAf8EAjAAMCAGA1UdEQQZMBeCFWNoYXQuaG9tZS5pdGhpbnVlbC5tZTAd
+BgNVHQ4EFgQUyEnM2eFtogWXVAlOuX7hXJgy8p4wHwYDVR0jBBgwFoAUWOnJ+SsA
+QaIupTJ9iuVe++RDH9kwCgYIKoZIzj0EAwMDaAAwZQIwKpmMrnVeA1MWn8ATBt0t
+GVmIe3U/mKj6U8h/HW5gmZIJnLjlINCKDDsNqZnnVkU6AjEAkZTcXMfPEw0/7hkA
+6BvXwJyKYYBUBxF45bB+iDmST1V1ZNj9r4hVPwpn4zRt/k9O
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+MIIC3zCCAmSgAwIBAgIUY9mtVz7FsiAwx3BTci8chQ6BUfcwCgYIKoZIzj0EAwMw
+VTELMAkGA1UEBhMCR0IxFzAVBgNVBAgMDkNhbWJyaWRnZXNoaXJlMRIwEAYDVQQH
+DAlDYW1icmlkZ2UxGTAXBgNVBAMMEGhvbWUuaXRoaW51ZWwubWUwHhcNMjYwNzA4
+MDQ0NTMzWhcNMzYwNzA3MDQ0NTMzWjBVMQswCQYDVQQGEwJHQjEXMBUGA1UECAwO
+Q2FtYnJpZGdlc2hpcmUxEjAQBgNVBAcMCUNhbWJyaWRnZTEZMBcGA1UEAwwQaG9t
+ZS5pdGhpbnVlbC5tZTB2MBAGByqGSM49AgEGBSuBBAAiA2IABMuCSPY+KLJZr0bo
++kFuWKQ8lU+ZHHguQeIq4B7HkBtc1u47JAQxR/5J8q5SG7QEJh9Ufr00CMP7aekZ
+uCOlpU0Ool20P6fqsCEvxl2wqk6Iu8FdFsDvln4ers9Mx6hWKKOB9DCB8TASBgNV
+HRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBBjA7BgNVHR8ENDAyMDCgLqAs
+hipodHRwOi8vZGlza3N0YXRpb24uaG9tZS5pdGhpbnVlbC5tZS9jYS5jcmwwKAYD
+VR0RBCEwH4Edd2lsZnJpZWQuY2hhdXZlYXVAaXRoaW51ZWwubWUwRQYDVR0eAQH/
+BDswOaA3MAiCBi5sb2NhbDATghEuaG9tZS5pdGhpbnVlbC5tZTAKhwjAqAoA////
+ADAKhwjAqGMA////ADAdBgNVHQ4EFgQUWOnJ+SsAQaIupTJ9iuVe++RDH9kwCgYI
+KoZIzj0EAwMDaQAwZgIxANJYbdTD+HVLJ8UUEHOvYOUIx9T/gDJMXrkxOCZEyslN
+Z7LpaxI187G1y8Uoe+usEAIxAKEhkM6pUh4bAnYNo/I//nurv7pX9CJewH1zOtRN
+WUO8/ZweNnv8BJ5U3qsYIYCQ0w==
+-----END CERTIFICATE-----
