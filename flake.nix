@@ -48,7 +48,7 @@
         ];
 
         specialArgs = {
-          inherit username hostname overlays pathRoot;
+          inherit username hostname overlays pathRoot inputs;
         };
       };
       mkDarwinSystem = username: hostname:
@@ -68,7 +68,7 @@
         ];
 
         specialArgs = {
-          inherit username hostname overlays pathRoot;
+          inherit username hostname overlays pathRoot inputs;
         };
       };
       mkNixosSystem = username: hostname:
@@ -76,9 +76,6 @@
           modules = [
             ./hosts/linux/${hostname}
           ];
-          specialArgs = {
-            inherit inputs;
-          };
         };
 
       mkHomeManagerConfig = username: system: home-manager.lib.homeManagerConfiguration rec {
@@ -91,7 +88,7 @@
           inputs.mac-app-util.homeManagerModules.default
         ];
         extraSpecialArgs = {
-          inherit username pathRoot;
+          inherit username pathRoot inputs;
         };
       };
     in
