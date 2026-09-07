@@ -1,8 +1,12 @@
-{ config, pkgs, lib, username, pathRoot, ... }:
+{ config, pkgs, lib, username, pathRoot, inputs, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux isx86_64;
   userBase = if isDarwin then "Users" else "home";
   homeDirectory = "/${userBase}/${username}";
+  unstable_pkgs = import inputs.nixpkgs-unstable {
+    inherit (pkgs) config;
+    inherit (pkgs.stdenv.hostPlatform) system;
+  };
 in
 {
   sops.age.keyFile = homeDirectory + "/.config/sops/age/keys.txt";
@@ -340,6 +344,10 @@ in
       overrideGpg = true;
       commit.signOff = true;
     };
+  };
+  programs.opencode = {
+    enable = true;
+    package = unstable_pkgs.opencode;
   };
   programs.ripgrep = {
     enable = true;

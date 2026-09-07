@@ -7,6 +7,20 @@ in
     calibre.enable = isLinux;
     element-desktop.enable = true;
     prismlauncher.enable = true;
+    opencode.settings = {
+      subagent_depth = 0;
+      provider = {
+
+        "Ithinuel's AI" = {
+          npm = "@ai-sdk/openai-compatible";
+          options.baseURL = "https://ollama.home.ithinuel.me/v1";
+          models = {
+            "gemma4:12b" = { };
+            "qwen3.5:9b" = { };
+          };
+        };
+      };
+    };
   };
   home.packages = [
     pkgs.slack

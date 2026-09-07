@@ -10,6 +10,7 @@
     mac-app-util.url = "github:ithinuel/mac-app-util/fix/missing-icons";
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-26.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim.url = "github:nix-community/nixvim/nixos-26.05";
     sops-nix.url = "github:mic92/sops-nix";
     utils.url = "github:numtide/flake-utils";
